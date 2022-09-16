@@ -1,5 +1,6 @@
-# SmartBrain-api - v2
-Final project for ZTM course
+# Face Detection App backend
+
+Final project for ZTM course - use the Clarifai API to detect faces in images.
 
 1. Clone this repo
 2. Run `npm install`
@@ -9,4 +10,4 @@ Final project for ZTM course
 
 You can grab Clarifai API key [here](https://www.clarifai.com/)
 
-** Make sure you use postgreSQL instead of mySQL for this code base.
+\*\* Make sure you use postgreSQL instead of mySQL for this code base.
