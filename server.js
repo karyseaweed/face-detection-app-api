@@ -15,10 +15,10 @@ const db = require('knex')({
   // connect to your own database here:
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    user: 'karyseaweed',
+    host: 'localhost',
+    user: '',
     password: '',
-    database: 'face-detection',
+    database: 'face-detection-db',
   },
 });
 
@@ -29,7 +29,9 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send(db.users);
 });
-app.post('/signin', signin.handleSignin(db, bcrypt));
+app.post('/signin', (req, res) => {
+  signin.handleSignin(req, res, db, bcrypt);
+});
 app.post('/register', (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
