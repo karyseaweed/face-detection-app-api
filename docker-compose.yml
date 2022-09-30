@@ -1,0 +1,36 @@
+version: '3.9'
+
+x-common-variables: &common-variables
+  POSTGRES_USER: seaweed
+  POSTGRES_PASSWORD: seaiskool
+  POSTGRES_DB: face-detection-docker
+  POSTGRES_HOST: postgres
+
+services:
+  # PostgreSQL
+  postgres:
+    restart: always
+    build: ./postgres
+    environment: *common-variables
+    ports:
+      - '5431:5432'
+
+  # Redis
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+
+  # Backend API
+  face-detection-api:
+    container_name: backend
+    build: ./
+    command: npm start
+    working_dir: /usr/src/face-detection-app-api
+    environment:
+      <<: *common-variables
+      REDIS_URI: redis://redis:6379
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src/face-detection-app-api
